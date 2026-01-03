@@ -1,0 +1,54 @@
+/* Nord Wofi Theme */
+
+* {
+  font-family: JetBrainsMono Nerd Font, monospace;
+  font-size: 14px;
+}
+
+window {
+  margin: 0;
+  padding: 10px;
+  border-radius: 12px;
+  background-color: #2e3440; /* nord0 */
+}
+
+#input {
+  margin-bottom: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: none;
+  color: #eceff4;           /* nord6 */
+  background-color: #3b4252; /* nord1 */
+}
+
+#outer-box {
+  padding: 5px;
+}
+
+#inner-box {
+  background-color: transparent;
+}
+
+#entry {
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: #d8dee9; /* nord4 */
+}
+
+#entry:selected {
+  background-color: #4c566a; /* nord3 */
+  color: #eceff4;
+}
+
+#text {
+  color: inherit;
+}
+
+#scroll {
+  margin: 0;
+}
+
+#entry:selected #text {
+  font-weight: bold;
+}
+
