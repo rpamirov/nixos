@@ -138,12 +138,12 @@
       package = pkgs.nordzy-cursor-theme;
     };
   };
-
   xdg.configFile."wofi/style.css".source = ./dotfiles/wofi/style.css;
   xdg.configFile."hypr".source = ./dotfiles/hypr;
   xdg.configFile."kitty".source = ./dotfiles/kitty;
   xdg.configFile."waybar".source = ./dotfiles/waybar;
   xdg.configFile."starship.toml".source = ./dotfiles/starship.toml;
   xdg.configFile."rg".source = ./dotfiles/rg;
-  xdg.configFile."tmux".source = ./dotfiles/tmux;
+  xdg.configFile."tmux/tmux.conf".source = ./dotfiles/tmux/tmux.conf;
+  xdg.configFile."zellij/config.kdl".source = ./dotfiles/zellij/config.kdl;
 }
