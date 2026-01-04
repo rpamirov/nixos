@@ -4,7 +4,9 @@
   "height": 34,
 
   "modules-left": [
-    "clock",
+    "hyprland/language",
+    "clock#date",
+    "clock#time",
     "hyprland/workspaces"
   ],
 
@@ -15,6 +17,7 @@
   "modules-right": [
     "pulseaudio",
     "network",
+    "temperature",
     "battery",
     "tray"
   ],
@@ -32,11 +35,23 @@
     "format": "{}",
     "max-length": 50
   },
+  "hyprland/language": {
+    "format": "⌨ {}",
+    "interval": 1,
+    "format-en": "US",
+    "format-ru": "RU"
+  },
 
-  "clock": {
-    "interval": 60,
-    "format": "  {:%H:%M %d %b}",
-    "tooltip-format": "  {:%A, %d %B %Y}",
+  "clock#time": {
+    "interval": 1,
+    "format": " {:%H:%M:%S}",
+    "tooltip": false
+  },
+  
+  "clock#date": {
+    "interval": 10,
+    "format": " {:%d %b}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "on-click": "kitty -e cal"
   },
 
@@ -55,12 +70,20 @@
 
   "battery": {
     "states": {
-      "charged": 100,
       "warning": 30,
       "critical": 15
     },
     "format": "{icon}  {capacity}%",
+    "format-charging": "  {capacity}%",
+    "format-plugged": "  {capacity}%",
+    "format-full": "  100%",
     "format-icons": ["", "", "", "", ""]
+  },
+
+  "temperature": {
+    "critical-threshold": 80,
+    "format": "{icon} {temperatureC}°C",
+    "format-icons": [""]
   },
 
   "tray": {

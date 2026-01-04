@@ -37,17 +37,37 @@
     };
   };
   programs.git = {
-  enable = true;
-
-  settings = {
-    user = {
-      name = "Ruslan Amirov";
-      email = "ruslan.amirov@pm.me";
+    enable = true;
+    settings = {
+      user = {
+        name = "Ruslan Amirov";
+        email = "ruslan.amirov@pm.me";
+        };
+      init.defaultBranch = "main";
       };
-    init.defaultBranch = "main";
+  };
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Nordic";
+      package = pkgs.nordic;
+    };
+  
+    iconTheme = {
+      name = "Nordzy";
+      package = pkgs.nordzy-icon-theme;
+    };
+  
+    cursorTheme = {
+      name = "Nordzy-cursors";
+      size = 24;
+      package = pkgs.nordzy-cursor-theme;
     };
   };
+
   xdg.configFile."wofi/style.css".source = ./dotfiles/wofi/style.css;
   xdg.configFile."hypr".source = ./dotfiles/hypr;
+  xdg.configFile."kitty".source = ./dotfiles/kitty;
   xdg.configFile."waybar".source = ./dotfiles/waybar;
 }

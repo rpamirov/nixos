@@ -4,7 +4,7 @@
 
 * {
   font-family: JetBrainsMono Nerd Font, monospace;
-  font-size: 13px;
+  font-size: 14px;
   border: none;
   border-radius: 0;
   min-height: 0;
@@ -21,10 +21,12 @@ window#waybar {
 #pulseaudio,
 #network,
 #battery,
+#language,
+#temperature,
 #tray {
   padding: 0 10px;
   margin: 4px 4px;
-  background: #3b4252; /* nord1 */
+  background: #3b4252;
   border-radius: 10px;
 }
 
@@ -46,7 +48,6 @@ window#waybar {
 }
 
 #clock {
-  color: #81a1c1;
   font-weight: bold;
 }
 
@@ -58,16 +59,37 @@ window#waybar {
   color: #bf616a;
 }
 
-#battery.charged {
-  color: #a3be8c;
+#battery {
+  color: #d8dee9;
+}
+
+#battery.charging {
+  color: #ebcb8b;
+}
+
+#battery.plugged {
+  color: #8fbcbb;
 }
 
 #battery.warning {
-  color: #ebcb8b;
+  color: #d08770;
 }
 
 #battery.critical {
   color: #bf616a;
+}
+
+#temperature.critical {
+  color: #bf616a;
+  font-weight: bold;
+}
+
+#language.ru {
+  color: #ebcb8b;
+}
+
+#language.en {
+  color: #a3be8c;
 }
 
 #tray {
