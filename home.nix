@@ -145,4 +145,5 @@
   xdg.configFile."waybar".source = ./dotfiles/waybar;
   xdg.configFile."starship.toml".source = ./dotfiles/starship.toml;
   xdg.configFile."rg".source = ./dotfiles/rg;
+  xdg.configFile."tmux".source = ./dotfiles/tmux;
 }
