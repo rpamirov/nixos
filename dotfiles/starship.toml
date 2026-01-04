@@ -1,0 +1,49 @@
+# -------- Core --------
+add_newline = false
+command_timeout = 500
+
+# -------- Prompt --------
+[character]
+success_symbol = "❯"
+error_symbol = "❯"
+vimcmd_symbol = "❮"
+vimcmd_replace_one_symbol = "▶"
+vimcmd_replace_symbol = "▶"
+vimcmd_visual_symbol = "◆"
+
+# -------- Directory --------
+[directory]
+format = "[$path]($style) "
+style = "bold #81A1C1"
+truncation_length = 3
+truncate_to_repo = true
+
+# -------- Git --------
+[git_branch]
+symbol = " "
+style = "#A3BE8C"
+
+[git_status]
+style = "#EBCB8B"
+
+[nodejs]
+symbol = " "
+style = "#A3BE8C"
+
+[python]
+symbol = " "
+style = "#88C0D0"
+
+[cmd_duration]
+min_time = 500
+style = "#4C566A"
+
+[package]
+disabled = true
+
+[hostname]
+disabled = true
+
+[username]
+disabled = true
+

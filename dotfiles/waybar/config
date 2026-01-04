@@ -62,9 +62,20 @@
   },
 
   "network": {
-    "format-wifi": "  {essid} ({signalStrength}%)",
+    "format-wifi": "{icon}  {essid} ({signalStrength}%)",
     "format-ethernet": "󰈀  wired",
     "format-disconnected": "  offline",
+  
+    "format-icons": [
+      "󰤯",  // 0–20%
+      "󰤟",  // 20–40%
+      "󰤢",  // 40–60%
+      "󰤥",  // 60–80%
+      "󰤨"   // 80–100%
+    ],
+  
+    "on-click": "nm-connection-editor",
+    "on-click-right": "kitty -e nmtui",
     "tooltip": true
   },
 

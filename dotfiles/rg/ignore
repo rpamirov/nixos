@@ -1,0 +1,10 @@
+.git
+.cache
+.local
+.nix-profile
+.nix-defexpr
+.nix-channels
+node_modules
+result
+dist
+build
