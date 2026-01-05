@@ -138,6 +138,13 @@
       package = pkgs.nordzy-cursor-theme;
     };
   };
+
+  programs.nixvim = {
+    enable = true;
+    imports = [
+      ./nixvim
+    ];
+  };
   xdg.configFile."wofi/style.css".source = ./dotfiles/wofi/style.css;
   xdg.configFile."hypr".source = ./dotfiles/hypr;
   xdg.configFile."kitty".source = ./dotfiles/kitty;
