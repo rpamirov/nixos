@@ -30,6 +30,29 @@
     user = "rpamirov";
   };
 
+   # NVIDIA driver
+  services.xserver.videoDrivers = [ "nvidia" ];
+  boot.kernelParams = [
+    "nvidia-drm.modeset=1"
+  ];
+  hardware.graphics.enable = true;
+  hardware.enableRedistributableFirmware = true;
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = true;
+    powerManagement.finegrained = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    open = false;
+    nvidiaSettings = true;
+    prime = {
+      offload.enable = true;
+      offload.enableOffloadCmd = true;
+      # IMPORTANT: correct bus IDs
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
+  };
+ 
   # Sound.
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
@@ -56,10 +79,6 @@
   programs.zsh.enable = true;
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
-  };
-  hardware = {
-    graphics.enable = true;
-    nvidia.modesetting.enable = true;
   };
 
   #Hyprland
