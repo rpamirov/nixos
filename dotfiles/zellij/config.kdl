@@ -273,87 +273,19 @@ web_client {
 }
  
 // Use a simplified UI without special fonts (arrow glyphs)
-// Options:
-//   - true
-//   - false (Default)
-// 
-// simplified_ui true
- 
-// Choose the theme that is specified in the themes section.
-// Default: default
-// 
+simplified_ui false 
 theme "nord"
- 
-// Choose the base input mode of zellij.
-// Default: normal
-// 
-// default_mode "locked"
- 
-// Choose the path to the default shell that zellij will use for opening new panes
-// Default: $SHELL
-// 
-// default_shell "fish"
- 
-// Choose the path to override cwd that zellij will use for opening new panes
-// 
+default_mode "normal"
+default_shell "zsh" 
 // default_cwd "/tmp"
- 
-// The name of the default layout to load on startup
-// Default: "default"
-// 
 // default_layout "compact"
- 
-// The folder in which Zellij will look for layouts
-// (Requires restart)
-// 
 // layout_dir "/tmp"
- 
-// The folder in which Zellij will look for themes
-// (Requires restart)
-// 
 // theme_dir "/tmp"
- 
-// Toggle enabling the mouse mode.
-// On certain configurations, or terminals this could
-// potentially interfere with copying text.
-// Options:
-//   - true (default)
-//   - false
-// 
-// mouse_mode false
- 
-// Toggle having pane frames around the panes
-// Options:
-//   - true (default, enabled)
-//   - false
-// 
-// pane_frames false
- 
-// When attaching to an existing session with other users,
-// should the session be mirrored (true)
-// or should each user have their own cursor (false)
-// (Requires restart)
-// Default: false
-// 
-// mirror_session true
- 
-// Choose what to do when zellij receives SIGTERM, SIGINT, SIGQUIT or SIGHUP
-// eg. when terminal window with an active zellij session is closed
-// (Requires restart)
-// Options:
-//   - detach (Default)
-//   - quit
-// 
-// on_force_close "quit"
- 
-// Configure the scroll back buffer size
-// This is the number of lines zellij stores for each pane in the scroll back
-// buffer. Excess number of lines are discarded in a FIFO fashion.
-// (Requires restart)
-// Valid values: positive integers
-// Default value: 10000
-// 
-// scroll_buffer_size 10000
+mouse_mode true
+pane_frames true
+mirror_session false
+on_force_close "detach"
+scroll_buffer_size 10000
  
 // Provide a command to execute when copying text. The text will be piped to
 // the stdin of the program to perform the copy. This can be used with
@@ -500,14 +432,7 @@ theme "nord"
 // 
 // stacked_resize false
  
-// Whether to show tips on startup
-// Default: true
-// 
-// show_startup_tips false
- 
-// Whether to show release notes on first version run
-// Default: true
-// 
+show_startup_tips false
 // show_release_notes false
  
 // Whether to enable mouse hover effects and pane grouping functionality
