@@ -35,6 +35,7 @@
         indent.enabled = true;
         input.enabled = true;
         scroll.enabled = true;
+        bufdelete.enabled = true;
         profiler.enabled = false;
       };
     };

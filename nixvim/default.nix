@@ -3,6 +3,7 @@
   enableMan = false;
   imports = [
     ./settings.nix
+    ./keymaps.nix
     ./plugins
   ];
 
