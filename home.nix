@@ -145,6 +145,8 @@
       ./nixvim
     ];
   };
+  programs.zen-browser.enable = true;
+
   xdg.configFile."wofi/style.css".source = ./dotfiles/wofi/style.css;
   xdg.configFile."hypr".source = ./dotfiles/hypr;
   xdg.configFile."kitty".source = ./dotfiles/kitty;
