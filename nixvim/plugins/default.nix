@@ -29,5 +29,6 @@
     ./completion/blink.nix
     ./completion/friendly-snippets.nix
     ./git/gitsigns.nix
+    ./ui
   ];
 }

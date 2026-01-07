@@ -40,10 +40,17 @@
         };
       };
 
+      sqls.enable = true;
+      pyright.enable = true;
+      ruff.enable = true;
+      bashls.enable = true;
+      ansiblels.enable = true;
+      yamlls.enable = true;
+      clangd.enable = true;
+      lua_ls.enable = true;
+      taplo.enable = true;
       nushell.enable = true;
       qmlls.enable = pkgs.stdenv.hostPlatform.isLinux;
-      sqls.enable = true;
-      taplo.enable = true;
     };
 
     # keymaps.lspBuf = {
