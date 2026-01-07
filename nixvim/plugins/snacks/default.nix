@@ -7,12 +7,15 @@
 {
   imports = [
     ./lazygit.nix
+    ./picker.nix
+    ./picker-lsp.nix
   ];
 
   extraConfigLuaPre = lib.mkOrder 1 (
     lib.optionalString
       (config.plugins.snacks.enable && config.plugins.snacks.settings.profiler.enabled) # Lua
       ''
+
         if vim.env.PROF then
           local snacks = "${pkgs.vimPlugins.snacks-nvim}"
           vim.opt.rtp:append(snacks)
