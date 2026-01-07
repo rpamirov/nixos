@@ -23,5 +23,7 @@
     ./lang/python.nix
     ./lang/shell.nix
     ./lang/yaml.nix
+    ./completion/blink.nix
+    ./completion/friendly-snippets.nix
   ];
 }

@@ -5,6 +5,7 @@
     ./files.nix
     ./move.nix
     ./splitjoin.nix
+    ./snippets.nix
   ];
 
   plugins = {
