@@ -9,6 +9,7 @@
     ./lazygit.nix
     ./picker.nix
     ./picker-lsp.nix
+    ./rename.nix
   ];
 
   extraConfigLuaPre = lib.mkOrder 1 (
