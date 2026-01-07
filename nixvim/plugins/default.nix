@@ -1,6 +1,7 @@
 {
   imports = [
     ./theme
+    ./luasnip
     ./snacks
     ./editor/lz-n.nix
     ./editor/whichkey.nix
