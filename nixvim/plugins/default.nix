@@ -1,33 +1,13 @@
 {
   imports = [
     ./theme
-    ./luasnip
     ./snacks
-    ./editor/lz-n.nix
-    ./editor/whichkey.nix
+    ./editor
     ./mini
     ./debug/dap.nix
-    ./treesitter/treesitter.nix
-    ./treesitter/treesitter-textobjects.nix
-    ./treesitter/ts-comments.nix
-    ./lsp/conform.nix
-    ./lsp/fastaction.nix
-    ./lsp/lsp.nix
-    ./lsp/trouble.nix
-    ./lsp/otter.nix
-    ./lang/cpp.nix
-    ./lang/css.nix
-    ./lang/docker.nix
-    ./lang/html.nix
-    ./lang/json.nix
-    ./lang/lua.nix
-    ./lang/markdown.nix
-    ./lang/nix.nix
-    ./lang/python.nix
-    ./lang/shell.nix
-    ./lang/yaml.nix
-    ./completion/blink.nix
-    ./completion/friendly-snippets.nix
+    ./treesitter
+    ./lsp
+    ./completion
     ./git/gitsigns.nix
     ./ui
   ];

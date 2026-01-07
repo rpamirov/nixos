@@ -1,124 +1,169 @@
 {
-  config,
-  pkgs,
   lib,
+  pkgs,
   ...
 }:
-let
-  inherit (lib) mkIf optionals;
-in
 {
-  plugins = {
-    conform-nvim = {
-      enable = true;
-
-      autoInstall = {
-        enable = true;
-        overrides = {
-          swift_format = mkIf pkgs.stdenv.hostPlatform.isLinux null;
-        };
-      };
-
-      lazyLoad.settings = {
-        cmd = [ "ConformInfo" ];
-        event = [ "BufWritePre" ];
-      };
-
-      luaConfig.pre = ''
+  config = {
+    extraConfigLuaPre =
+      # lua
+      ''
         local slow_format_filetypes = {}
+
+        vim.api.nvim_create_user_command("FormatDisable", function(args)
+           if args.bang then
+            -- FormatDisable! will disable formatting just for this buffer
+            vim.b.disable_autoformat = true
+          else
+            vim.g.disable_autoformat = true
+          end
+        end, {
+          desc = "Disable autoformat-on-save",
+          bang = true,
+        })
+        vim.api.nvim_create_user_command("FormatEnable", function()
+          vim.b.disable_autoformat = false
+          vim.g.disable_autoformat = false
+        end, {
+          desc = "Re-enable autoformat-on-save",
+        })
+        vim.api.nvim_create_user_command("FormatToggle", function(args)
+          if args.bang then
+            -- Toggle formatting for current buffer
+            vim.b.disable_autoformat = not vim.b.disable_autoformat
+          else
+            -- Toggle formatting globally
+            vim.g.disable_autoformat = not vim.g.disable_autoformat
+          end
+        end, {
+          desc = "Toggle autoformat-on-save",
+          bang = true,
+        })
       '';
-
+    plugins.conform-nvim = {
+      enable = true;
       settings = {
-        default_format_opts = {
-          lsp_format = "fallback";
-        };
+        format_on_save = ''
+          function(bufnr)
+            if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+              return
+            end
 
-        format_on_save = {
-          lspFallback = true;
-          timeoutMs = 500;
-        };
+            if slow_format_filetypes[vim.bo[bufnr].filetype] then
+              return
+            end
 
+            local function on_format(err)
+              if err and err:match("timeout$") then
+                slow_format_filetypes[vim.bo[bufnr].filetype] = true
+              end
+            end
+
+            return { timeout_ms = 200, lsp_fallback = true }, on_format
+           end
+        '';
+
+        format_after_save = ''
+          function(bufnr)
+            if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+              return
+            end
+
+            if not slow_format_filetypes[vim.bo[bufnr].filetype] then
+              return
+            end
+
+            return { lsp_fallback = true }
+          end
+        '';
+        notify_on_error = true;
         formatters_by_ft = {
-          # Use the "_" filetype to run formatters on filetypes that don't have other formatters configured.
-          "_" = [
-            "squeeze_blanks"
-            "trim_whitespace"
-            "trim_newlines"
+          html = {
+            __unkeyed-1 = "prettierd";
+            __unkeyed-2 = "prettier";
+            stop_after_first = true;
+          };
+          css = {
+            __unkeyed-1 = "prettierd";
+            __unkeyed-2 = "prettier";
+            stop_after_first = true;
+          };
+          javascript = {
+            __unkeyed-1 = "prettierd";
+            __unkeyed-2 = "prettier";
+            stop_after_first = true;
+          };
+          typescript = {
+            __unkeyed-1 = "prettierd";
+            __unkeyed-2 = "prettier";
+            stop_after_first = true;
+          };
+          python = [
+            "black"
+            "isort"
           ];
+          lua = [ "stylua" ];
+          nix = [ "nixfmt-rfc-style" ];
+          markdown = {
+            __unkeyed-1 = "prettierd";
+            __unkeyed-2 = "prettier";
+            stop_after_first = true;
+          };
+          yaml = {
+            __unkeyed-1 = "prettierd";
+            __unkeyed-2 = "prettier";
+            stop_after_first = true;
+          };
+          terraform = [ "terraform_fmt" ];
+          bicep = [ "bicep" ];
+          bash = [
+            "shellcheck"
+            "shellharden"
+            "shfmt"
+          ];
+          json = [ "jq" ];
+          "_" = [ "trim_whitespace" ];
         };
 
         formatters = {
-          biome = {
-            env = {
-              BIOME_CONFIG_PATH = pkgs.writeTextFile {
-                name = "biome.json";
-                text = lib.generators.toJSON { } {
-                  "$schema" = "${pkgs.biome}/node_modules/@biomejs/biome/configuration_schema.json";
-                  formatter.useEditorconfig = true;
-                };
-              };
-            };
+          black = {
+            command = "${lib.getExe pkgs.black}";
           };
+          isort = {
+            command = "${lib.getExe pkgs.isort}";
+          };
+          nixfmt-rfc-style = {
+            command = "${lib.getExe pkgs.nixfmt-rfc-style}";
+          };
+          alejandra = {
+            command = "${lib.getExe pkgs.alejandra}";
+          };
+          jq = {
+            command = "${lib.getExe pkgs.jq}";
+          };
+          prettierd = {
+            command = "${lib.getExe pkgs.prettierd}";
+          };
+          stylua = {
+            command = "${lib.getExe pkgs.stylua}";
+          };
+          shellcheck = {
+            command = "${lib.getExe pkgs.shellcheck}";
+          };
+          shfmt = {
+            command = "${lib.getExe pkgs.shfmt}";
+          };
+          shellharden = {
+            command = "${lib.getExe pkgs.shellharden}";
+          };
+          bicep = {
+            command = "${lib.getExe pkgs.bicep}";
+          };
+          #yamlfmt = {
+          #  command = "${lib.getExe pkgs.yamlfmt}";
+          #};
         };
       };
-    };
-  };
-
-  keymaps = optionals config.plugins.conform-nvim.enable [
-    {
-      action.__raw = ''
-        function(args)
-         vim.cmd({cmd = 'Conform', args = args});
-        end
-      '';
-      mode = "v";
-      key = "<leader>lf";
-      options = {
-        silent = true;
-        buffer = false;
-        desc = "Format selection";
-      };
-    }
-    {
-      action.__raw = ''
-        function()
-          vim.cmd('Conform');
-        end
-      '';
-      key = "<leader>lf";
-      options = {
-        silent = true;
-        desc = "Format buffer";
-      };
-    }
-  ];
-
-  userCommands = lib.mkIf config.plugins.conform-nvim.enable {
-    Conform = {
-      desc = "Formatting using conform.nvim";
-      range = true;
-      command.__raw = ''
-        function(args)
-          ${lib.optionalString config.plugins.lz-n.enable "require('lz.n').trigger_load('conform.nvim')"}
-          local range = nil
-          if args.count ~= -1 then
-            local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
-            range = {
-              start = { args.line1, 0 },
-              ["end"] = { args.line2, end_line:len() },
-            }
-          end
-          require("conform").format({ async = true, lsp_format = "fallback", range = range },
-          function(err)
-            if not err then
-              local mode = vim.api.nvim_get_mode().mode
-              if vim.startswith(string.lower(mode), "v") then
-                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
-              end
-            end
-          end)
-        end
-      '';
     };
   };
 }
