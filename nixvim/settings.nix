@@ -19,14 +19,6 @@
       loaded_perl_provider = 0; # Perl
       loaded_python_provider = 0; # Python 2
     };
-    colorschemes.nord = {
-      enable = true;
-      settings = {
-        borders = true;
-        contrast = true;
-        disable_background = false;
-      };
-    };
     opts = {
       # Performance & Timing
       updatetime = 100; # CursorHold delay; faster completion and git signs

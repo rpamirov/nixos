@@ -142,14 +142,6 @@ in
     }
     {
       mode = "n";
-      key = "<leader>fe";
-      action = "<cmd>lua Snacks.explorer()<cr>";
-      options = {
-        desc = "File Explorer";
-      };
-    }
-    {
-      mode = "n";
       key = "<leader>ff";
       action = "<cmd>lua Snacks.picker.files({hidden = true, ignored = true})<cr>";
       options = {
