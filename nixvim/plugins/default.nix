@@ -5,8 +5,23 @@
     ./editor/lz-n.nix
     ./editor/whichkey.nix
     ./mini
+    ./debug/dap.nix
     ./treesitter/treesitter.nix
     ./treesitter/treesitter-textobjects.nix
     ./treesitter/ts-comments.nix
+    ./lsp/conform.nix
+    ./lsp/fastaction.nix
+    ./lsp/lsp.nix
+    ./lang/cpp.nix
+    ./lang/css.nix
+    ./lang/docker.nix
+    ./lang/html.nix
+    ./lang/json.nix
+    ./lang/lua.nix
+    ./lang/markdown.nix
+    ./lang/nix.nix
+    ./lang/python.nix
+    ./lang/shell.nix
+    ./lang/yaml.nix
   ];
 }
