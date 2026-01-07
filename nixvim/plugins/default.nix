@@ -12,6 +12,8 @@
     ./lsp/conform.nix
     ./lsp/fastaction.nix
     ./lsp/lsp.nix
+    ./lsp/trouble.nix
+    ./lsp/otter.nix
     ./lang/cpp.nix
     ./lang/css.nix
     ./lang/docker.nix
@@ -25,5 +27,6 @@
     ./lang/yaml.nix
     ./completion/blink.nix
     ./completion/friendly-snippets.nix
+    ./git/gitsigns.nix
   ];
 }

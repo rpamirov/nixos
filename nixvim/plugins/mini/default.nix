@@ -13,6 +13,7 @@
     mini-ai.enable = true;
     mini-basics.enable = true;
     mini-bracketed.enable = true;
+    mini-snippets.enable = true;
 
     mini-comment = {
       enable = true;
