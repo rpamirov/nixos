@@ -300,8 +300,6 @@ theme "nord"
 default_mode "normal"
 default_shell "zsh"
 // default_cwd "/tmp"
-// default_layout "compact"
-// layout_dir "/tmp"
 // theme_dir "/tmp"
 mouse_mode true
 pane_frames true

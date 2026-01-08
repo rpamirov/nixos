@@ -1,0 +1,30 @@
+layout {
+    default_tab_template {
+        children
+        pane size=1 borderless=true {
+            plugin location="file:${pkgs.zjstatus}/bin/zjstatus.wasm" {
+                # left side
+                format_left   "#[fg=#81A1C1,bold]{mode} #[fg=#88C0D0]{tabs}"
+
+                # center (nothing)
+                format_center ""
+
+                # right side — date, time
+                format_right  "#[fg=#EBCB8B]{datetime}"
+
+                # space formatting
+                format_space  ""
+
+                # visual tweaks
+                border_enabled  "false"
+                border_char     "─"
+                border_format   "#[fg=#4C566A]{char}"
+                border_position "top"
+
+                # datetime settings
+                datetime_format "%a %d %b %H:%M"
+            }
+        }
+    }
+}
+
