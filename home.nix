@@ -9,14 +9,14 @@
   home.packages = with pkgs; [
     nordzy-cursor-theme
   ];
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # pkgs.hello
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
+  # # Adds the 'hello' command to your environment. It prints a friendly
+  # pkgs.hello
+  # # You can also create simple shell scripts directly inside your
+  # # configuration. For example, this adds a command 'my-hello' to your
+  # # environment:
+  # (pkgs.writeShellScriptBin "my-hello" ''
+  #   echo "Hello, ${config.home.username}!"
+  # '')
   home.pointerCursor.enable = false;
   home.file = {
     # ".screenrc".source = dotfiles/screenrc;
@@ -78,7 +78,7 @@
         --preview 'bat --style=numbers --color=always --line-range :300 {}'
         --preview-window=right:60%:wrap
       "
-        '';
+    '';
     history = {
       size = 10000;
       save = 10000;
@@ -94,9 +94,9 @@
         name = "zsh-vi-mode";
         src = pkgs.zsh-vi-mode;
       }
-  ];
+    ];
     shellAliases = {
-#      btw = "echo nixos by the way";
+      zj = "zellij $@";
     };
   };
 
@@ -106,16 +106,16 @@
       user = {
         name = "Ruslan Amirov";
         email = "ruslan.amirov@pm.me";
-        };
-      init.defaultBranch = "main";
       };
+      init.defaultBranch = "main";
+    };
   };
 
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
   };
-  
+
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
@@ -126,12 +126,12 @@
       name = "Nordic";
       package = pkgs.nordic;
     };
-  
+
     iconTheme = {
       name = "Nordzy";
       package = pkgs.nordzy-icon-theme;
     };
-  
+
     cursorTheme = {
       name = "Nordzy-cursors";
       size = 24;
@@ -154,5 +154,5 @@
   xdg.configFile."starship.toml".source = ./dotfiles/starship.toml;
   xdg.configFile."rg".source = ./dotfiles/rg;
   xdg.configFile."tmux/tmux.conf".source = ./dotfiles/tmux/tmux.conf;
-  xdg.configFile."zellij/config.kdl".source = ./dotfiles/zellij/config.kdl;
+  xdg.configFile."zellij".source = ./dotfiles/zellij;
 }

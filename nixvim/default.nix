@@ -12,12 +12,11 @@
     lazygit
     fzf
     fd
-    # Formatters
+    gh
+    wordnet # blinc completion
     stylua # Lua formatter
     nixfmt-rfc-style # Nix formatter
-    # Linters
     shellcheck # Shell script linter
-    # Debuggers
     gcc
   ];
 }
