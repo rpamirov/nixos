@@ -5,6 +5,7 @@
     ./files.nix
     ./move.nix
     ./splitjoin.nix
+    # ./tablines.nix
   ];
 
   plugins = {

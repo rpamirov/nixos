@@ -5,5 +5,6 @@
     ./whichkey.nix
     ./smart-splits.nix
     ./lualine.nix
+    ./bufferline.nix
   ];
 }
