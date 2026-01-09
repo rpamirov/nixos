@@ -4,5 +4,6 @@
     ./autosave.nix
     ./whichkey.nix
     ./smart-splits.nix
+    ./lualine.nix
   ];
 }
