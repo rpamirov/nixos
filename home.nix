@@ -90,6 +90,7 @@ in
     ];
     shellAliases = {
       zj = "zellij $@";
+      y = "yazi $@";
     };
   };
 
