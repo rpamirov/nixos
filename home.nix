@@ -150,7 +150,6 @@ in
   xdg.configFile."rg".source = ./dotfiles/rg;
   xdg.configFile."tmux/tmux.conf".source = ./dotfiles/tmux/tmux.conf;
   xdg.configFile."zellij/config.kdl".source = ./dotfiles/zellij/config.kdl;
-  xdg.configFile."zellij/plugins/zellij-autolock.wasm".source =
-    ./dotfiles/zellij/plugins/autolock.wasm;
+  xdg.configFile."zellij/plugins".source = ./dotfiles/zellij/plugins;
   xdg.configFile."zellij/layouts/default.kdl".text = layout;
 }

@@ -169,14 +169,73 @@ keybinds clear-defaults=true {
             MessagePlugin "autolock" {payload "disable";};
             SwitchToMode "Locked";
         }
-        bind "Ctrl h" {MoveFocusOrTab "Left"; }
-        bind "Ctrl l" {MoveFocusOrTab "Right"; }
-        bind "Ctrl j" {MoveFocus "Down"; }
-        bind "Ctrl k" {MoveFocus "Up"; }
-        bind "Alt h" { Resize "Increase left"; }
-        bind "Alt l" { Resize "Increase right"; }
-        bind "Alt j" { Resize "Increase down"; }
-        bind "Alt k" { Resize "Increase up"; }
+        bind "Ctrl h" {
+            MessagePlugin "file:~/.config/zellij/plugins/vim-zellij-navigator.wasm" {
+                name "move_focus_or_tab";
+                payload "left";
+                move_mod "ctrl"
+                use_arrow_keys "false"
+            };
+        }
+
+        bind "Ctrl j" {
+            MessagePlugin "file:~/.config/zellij/plugins/vim-zellij-navigator.wasm" {
+                name "move_focus";
+                payload "down";
+                move_mod "ctrl";
+                use_arrow_keys "false";
+            };
+        }
+
+        bind "Ctrl k" {
+            MessagePlugin "file:~/.config/zellij/plugins/vim-zellij-navigator.wasm" {
+                name "move_focus";
+                payload "up";
+                move_mod "ctrl";
+                use_arrow_keys "false";
+            };
+        }
+
+        bind "Ctrl l" {
+            MessagePlugin "file:~/.config/zellij/plugins/vim-zellij-navigator.wasm" {
+                name "move_focus_or_tab";
+                payload "right";
+                move_mod "ctrl"
+                use_arrow_keys "false";
+            };
+        }
+
+        bind "Alt h" {
+            MessagePlugin "file:~/.config/zellij/plugins/vim-zellij-navigator.wasm" {
+                name "resize";
+                payload "left";
+                resize_mod "alt";
+            };
+        }
+
+        bind "Alt j" {
+            MessagePlugin "file:~/.config/zellij/plugins/vim-zellij-navigator.wasm" {
+                name "resize";
+                payload "down";
+                resize_mod "alt";
+            };
+        }
+
+        bind "Alt k" {
+            MessagePlugin "file:~/.config/zellij/plugins/vim-zellij-navigator.wasm" {
+                name "resize";
+                payload "up";
+                resize_mod "alt";
+            };
+        }
+
+        bind "Alt l" {
+            MessagePlugin "file:~/.config/zellij/plugins/vim-zellij-navigator.wasm" {
+                name "resize";
+                payload "right";
+                resize_mod "alt";
+            };
+        }
         // bind "Ctrl d" { HalfPageScrollDown; }
         // bind "Ctrl u" { HalfPageScrollUp; }
         // bind "Ctrl f" { PageScrollDown; }
@@ -285,8 +344,8 @@ plugins {
     }
     autolock location="file:~/.config/zellij/plugins/zellij-autolock.wasm" {
         is_enabled true
-        triggers "nvim|vim|git|fzf|zoxide|atuin"
-        reaction_seconds "0.1"
+        triggers "git|fzf|zoxide|atuin"
+        reaction_seconds "0.3"
         print_to_log true
     }
 }
