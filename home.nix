@@ -1,22 +1,15 @@
 { config, pkgs, ... }:
-
+let
+  statusbar = import ./dotfiles/zellij/statusbar.nix { inherit pkgs config; };
+  layout = import ./dotfiles/zellij/layout.nix { inherit statusbar; };
+in
 {
   home.username = "rpamirov";
   home.homeDirectory = "/home/rpamirov";
   home.stateVersion = "25.11"; # Do not change carelessly.
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
   home.packages = with pkgs; [
     nordzy-cursor-theme
   ];
-  # # Adds the 'hello' command to your environment. It prints a friendly
-  # pkgs.hello
-  # # You can also create simple shell scripts directly inside your
-  # # configuration. For example, this adds a command 'my-hello' to your
-  # # environment:
-  # (pkgs.writeShellScriptBin "my-hello" ''
-  #   echo "Hello, ${config.home.username}!"
-  # '')
   home.pointerCursor.enable = false;
   home.file = {
     # ".screenrc".source = dotfiles/screenrc;
@@ -147,6 +140,7 @@
   };
   programs.zen-browser.enable = true;
 
+  #CONFIGS
   xdg.configFile."wofi/style.css".source = ./dotfiles/wofi/style.css;
   xdg.configFile."hypr".source = ./dotfiles/hypr;
   xdg.configFile."kitty".source = ./dotfiles/kitty;
@@ -154,5 +148,8 @@
   xdg.configFile."starship.toml".source = ./dotfiles/starship.toml;
   xdg.configFile."rg".source = ./dotfiles/rg;
   xdg.configFile."tmux/tmux.conf".source = ./dotfiles/tmux/tmux.conf;
-  xdg.configFile."zellij".source = ./dotfiles/zellij;
+  xdg.configFile."zellij/config.kdl".source = ./dotfiles/zellij/config.kdl;
+  xdg.configFile."zellij/plugins/zellij-autolock.wasm".source =
+    ./dotfiles/zellij/plugins/autolock.wasm;
+  xdg.configFile."zellij/layouts/default.kdl".text = layout;
 }

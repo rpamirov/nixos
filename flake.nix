@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    zjstatus.url = "github:dj95/zjstatus";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -19,19 +20,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-
-    zjstatus = {
-      url = "github:dj95/zjstatus";
-    };
   };
 
   outputs =
     {
       nixpkgs,
+      zjstatus,
       home-manager,
       nixvim,
       zen-browser,
-      zjstatus,
       ...
     }:
     let

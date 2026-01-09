@@ -289,6 +289,12 @@ plugins {
 
 load_plugins {
     autolock
+
+    "https://github.com/dj95/zjstatus/releases/latest/download/zjframes.wasm" {
+      hide_frame_for_single_pane       "true"
+      hide_frame_except_for_search     "true"
+      hide_frame_except_for_fullscreen "true"
+    }
 }
 web_client {
     font "monospace"
@@ -302,7 +308,7 @@ default_shell "zsh"
 // default_cwd "/tmp"
 // theme_dir "/tmp"
 mouse_mode true
-pane_frames true
+// pane_frames true
 mirror_session false
 on_force_close "detach"
 scroll_buffer_size 10000
