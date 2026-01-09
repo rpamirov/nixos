@@ -12,6 +12,7 @@
     ./rename.nix
     ./notifier.nix
     ./buffdelete.nix
+    ./dashboard.nix
   ];
 
   extraConfigLuaPre = lib.mkOrder 1 (
