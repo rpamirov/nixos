@@ -11,6 +11,7 @@
     ./picker-lsp.nix
     ./rename.nix
     ./notifier.nix
+    ./buffdelete.nix
   ];
 
   extraConfigLuaPre = lib.mkOrder 1 (
