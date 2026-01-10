@@ -1,9 +1,8 @@
 {
-  description = "Home Manager configuration of rpamirov";
+  description = "rpamirov unified NixOS + Home Manager config";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    zjstatus.url = "github:dj95/zjstatus";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -20,37 +19,54 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+
+    zjstatus.url = "github:dj95/zjstatus";
   };
 
   outputs =
     {
+      self,
       nixpkgs,
-      zjstatus,
       home-manager,
       nixvim,
       zen-browser,
+      zjstatus,
       ...
     }:
     let
       system = "x86_64-linux";
 
-      pkgs = import nixpkgs {
-        inherit system;
-        overlays = [
-          (final: prev: {
-            zjstatus = zjstatus.packages.${system}.default;
-          })
-        ];
-      };
+      mkHost =
+        hostname: hardware:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+
+          specialArgs = {
+            inherit nixvim zen-browser zjstatus;
+          };
+
+          modules = [
+            ./machines/${hostname}/default.nix
+            hardware
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.rpamirov = {
+                imports = [
+                  nixvim.homeModules.nixvim
+                  zen-browser.homeModules.beta
+                  ./home/home.nix
+                ];
+              };
+            }
+          ];
+        };
     in
     {
-      homeConfigurations.rpamirov = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          nixvim.homeModules.nixvim
-          zen-browser.homeModules.beta
-          ./home.nix
-        ];
+      nixosConfigurations = {
+        mi-laptop = mkHost "mi-laptop" ./machines/mi-laptop/hardware-configuration.nix;
+        thinkpad-laptop = mkHost "thinkpad-laptop" ./machines/thinkpad-laptop/hardware-configuration.nix;
       };
     };
 }

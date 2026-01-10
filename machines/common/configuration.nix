@@ -1,17 +1,16 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
-
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
-  # System settings 
-  networking.hostName = "nixos-btw";
+  # System settings
   networking.networkmanager.enable = true;
   networking.networkmanager.wifi.powersave = true;
   time.timeZone = "Europe/Moscow";
@@ -25,29 +24,6 @@
     user = "rpamirov";
   };
 
-   # NVIDIA driver
-  services.xserver.videoDrivers = [ "nvidia" ];
-  boot.kernelParams = [
-    "nvidia-drm.modeset=1"
-  ];
-  hardware.graphics.enable = true;
-  hardware.enableRedistributableFirmware = true;
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = true;
-    powerManagement.finegrained = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    open = false;
-    nvidiaSettings = true;
-    prime = {
-      offload.enable = true;
-      offload.enableOffloadCmd = true;
-      # IMPORTANT: correct bus IDs
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
-    };
-  };
- 
   # Sound.
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
@@ -62,7 +38,10 @@
 
   users.users.rpamirov = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "video"];
+    extraGroups = [
+      "wheel"
+      "video"
+    ];
     shell = pkgs.zsh;
     packages = with pkgs; [
       tree
@@ -87,7 +66,6 @@
     ruff
   ];
 
-
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="backlight", RUN+="${pkgs.coreutils}/bin/chgrp video /sys/class/backlight/%k/brightness"
     ACTION=="add", SUBSYSTEM=="backlight", RUN+="${pkgs.coreutils}/bin/chmod g+w /sys/class/backlight/%k/brightness"
@@ -111,6 +89,7 @@
       };
     };
   };
+
   # System packages for all users
   environment.systemPackages = with pkgs; [
     tmux
@@ -146,7 +125,7 @@
 
   services.openssh.enable = true;
 
-  system.stateVersion = "25.11"; # Do NOT change this value
+  system.stateVersion = "25.11";
   nix.settings.experimental-features = "nix-command flakes";
   nixpkgs.config.allowUnfree = true;
 }
