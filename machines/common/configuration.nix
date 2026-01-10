@@ -120,7 +120,7 @@
     viewnior
     nordic
     nwg-look
-    zed-editor
+    # zed-editor
   ];
 
   services.openssh.enable = true;

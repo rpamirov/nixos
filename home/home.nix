@@ -11,14 +11,6 @@ in
     nordzy-cursor-theme
   ];
   home.pointerCursor.enable = false;
-  home.file = {
-    # ".screenrc".source = dotfiles/screenrc;
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
-
-  };
   home.sessionVariables = {
     EDITOR = "nvim";
   };
@@ -132,7 +124,6 @@ in
       package = pkgs.nordzy-cursor-theme;
     };
   };
-
   programs.nixvim = {
     enable = true;
     imports = [
@@ -144,6 +135,7 @@ in
   #CONFIGS
   xdg.configFile."wofi/style.css".source = ./dotfiles/wofi/style.css;
   xdg.configFile."hypr".source = ./dotfiles/hypr;
+  xdg.configFile."background".source = ./background;
   xdg.configFile."kitty".source = ./dotfiles/kitty;
   xdg.configFile."waybar".source = ./dotfiles/waybar;
   xdg.configFile."starship.toml".source = ./dotfiles/starship.toml;

@@ -2,6 +2,9 @@
 {
   plugins = {
     treesitter = {
+      enable = true;
+      # folding.enable = true;
+
       grammarPackages =
         let
           # Large grammars that are not used

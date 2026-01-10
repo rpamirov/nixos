@@ -23,50 +23,62 @@
     zjstatus.url = "github:dj95/zjstatus";
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs,
-      home-manager,
-      nixvim,
-      zen-browser,
-      zjstatus,
-      ...
-    }:
-    let
-      system = "x86_64-linux";
+  outputs = { self, nixpkgs, home-manager, nixvim, zen-browser, zjstatus, ... }:
+  let
+    system = "x86_64-linux";
 
-      mkHost =
-        hostname: hardware:
-        nixpkgs.lib.nixosSystem {
-          inherit system;
-
-          specialArgs = {
-            inherit nixvim zen-browser zjstatus;
-          };
-
-          modules = [
-            ./machines/${hostname}/default.nix
-            hardware
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.rpamirov = {
-                imports = [
-                  nixvim.homeModules.nixvim
-                  zen-browser.homeModules.beta
-                  ./home/home.nix
-                ];
-              };
-            }
-          ];
-        };
-    in
-    {
-      nixosConfigurations = {
-        mi-laptop = mkHost "mi-laptop" ./machines/mi-laptop/hardware-configuration.nix;
-        thinkpad-laptop = mkHost "thinkpad-laptop" ./machines/thinkpad-laptop/hardware-configuration.nix;
-      };
+    zjOverlay = final: prev: {
+      zjstatus = zjstatus.packages.${system}.default;
     };
+
+    mkHost = hostname: hardware:
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+
+        modules = [
+          # Host config
+          ./machines/${hostname}/default.nix
+          hardware
+
+          # Apply overlays + nixpkgs config THE RIGHT WAY
+          {
+            nixpkgs = {
+              overlays = [ zjOverlay ];
+              config.allowUnfree = true;
+            };
+          }
+
+          # Home Manager
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            home-manager.users.rpamirov = {
+              imports = [
+                nixvim.homeModules.nixvim
+                zen-browser.homeModules.beta
+                ./home/home.nix
+              ];
+            };
+          }
+        ];
+
+        specialArgs = {
+          inherit nixvim zen-browser;
+        };
+      };
+  in
+  {
+    nixosConfigurations = {
+      mi-laptop =
+        mkHost "mi-laptop"
+          ./machines/mi-laptop/hardware-configuration.nix;
+
+      thinkpad-laptop =
+        mkHost "thinkpad-laptop"
+          ./machines/thinkpad-laptop/hardware-configuration.nix;
+    };
+  };
 }
+
