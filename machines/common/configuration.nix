@@ -15,8 +15,10 @@
   networking.networkmanager.wifi.powersave = true;
   time.timeZone = "Europe/Moscow";
   services.xserver.enable = true;
+  services.dbus.enable = true;
   services.xserver.xkb.layout = "us,ru";
   services.xserver.xkb.options = "caps:escape,grp:alt_shift_toggle";
+  services.udisks2.enable = true;
   services.printing.enable = true;
   services.getty.autologinUser = "rpamirov";
   services.displayManager.autoLogin = {
@@ -110,6 +112,7 @@
     telegram-desktop
     networkmanagerapplet
     swaynotificationcenter
+    libnotify
     waybar
     wofi
     yazi
@@ -120,7 +123,15 @@
     viewnior
     nordic
     nwg-look
-    zed-editor
+    ghostscript
+    texlive.combined.scheme-full
+    tectonic
+    nodePackages.mermaid-cli
+    nodePackages.prettier
+    tree-sitter
+    trash-cli
+    glab
+    # zed-editor
   ];
 
   services.openssh.enable = true;

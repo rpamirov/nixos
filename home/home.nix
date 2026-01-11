@@ -131,6 +131,18 @@ in
     ];
   };
   programs.zen-browser.enable = true;
+  wayland.windowManager.sway.config.startup = [
+    { command = "swaync"; }
+  ];
+  #Services
+  services.udiskie = {
+    enable = true;
+    settings = {
+      program_options = {
+        file_manager = "nautilus";
+      };
+    };
+  };
 
   #CONFIGS
   xdg.configFile."wofi/style.css".source = ./dotfiles/wofi/style.css;
